@@ -7,7 +7,7 @@ import useLoader from '../hooks/useLoader';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  const { /*isLoading,*/ showLoader, hideLoader } = useLoader();
+  const { isLoading, showLoader, hideLoader } = useLoader();
   const navigate = useNavigate();
   const URL_BASE = import.meta.env.VITE_URL_BASE;
 
@@ -175,7 +175,8 @@ function Register() {
           </div>
           <button
             type='submit'
-            className='w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300'
+            className='w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled={isLoading}
           >
             Registrar
           </button>

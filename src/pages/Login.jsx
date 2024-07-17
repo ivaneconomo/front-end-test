@@ -7,7 +7,7 @@ import useLoader from '../hooks/useLoader';
 import clientAxios from '../utils/client-axios';
 
 function Login() {
-  const { /*isLoading,*/ showLoader, hideLoader } = useLoader();
+  const { isLoading, showLoader, hideLoader } = useLoader();
 
   const {
     register,
@@ -88,7 +88,8 @@ function Login() {
         </div>
         <button
           type='submit'
-          className='w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300'
+          className='w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+          disabled={isLoading}
         >
           Iniciar Sesión
         </button>
