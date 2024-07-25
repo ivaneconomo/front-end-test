@@ -5,9 +5,12 @@ import { errorAlert, successAlert } from '../utils/alerts';
 import { useNavigate } from 'react-router-dom';
 import useLoader from '../hooks/useLoader';
 import clientAxios from '../utils/client-axios';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 function Login() {
   const { isLoading, showLoader, hideLoader } = useLoader();
+  const { setUser } = useContext(AuthContext);
 
   const {
     register,
@@ -22,7 +25,11 @@ function Login() {
     showLoader();
     try {
       const response = await clientAxios.post('/login', formData);
-      localStorage.setItem('token', response?.data?.token);
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      setUser(user);
 
       successAlert('¡Bien!', 'Login exitoso.', () => {
         navigate('/profile');
